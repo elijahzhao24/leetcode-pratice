@@ -13,7 +13,7 @@ class Solution:
         # initialize head with the smaller first element
         if l1:
             if l2:
-                if l1.val <= l2.val:           # <-- choose smaller (<=)
+                if l1.val <= l2.val:           
                     head = ListNode(l1.val)
                     l1 = l1.next
                 else:
@@ -32,7 +32,7 @@ class Solution:
         while l1 or l2:
             if l1:
                 if l2:
-                    if l1.val <= l2.val:       # <-- choose smaller (<=)
+                    if l1.val <= l2.val:     
                         cur.next = ListNode(l1.val)
                         l1 = l1.next
                     else:
