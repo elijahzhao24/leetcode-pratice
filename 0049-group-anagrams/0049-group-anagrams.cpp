@@ -1,23 +1,36 @@
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        unordered_map<string, vector<string>> storage;
-        vector<vector<string>> answer;
 
-        for (const string s : strs) {
-            int count[26] = {0};
-            for (char c : s) {
-                count[c - 'a']++;
+        unordered_map<string, vector<string>> storage;
+
+        for (string s:strs) {
+
+            vector<int> temp(26);  
+
+            for (char c: s) {
+                temp[c - 'a']++;
             }
-            string key = to_string(count[0]);
-            for (int i = 1; i < 26; i++) {
-                key += "|" + to_string(count[i]);
+
+            //convert to hashable string
+
+            string tempstring;
+            for (int i:temp) {
+                tempstring.push_back('#');
+                tempstring += to_string(i);
             }
-            storage[key].push_back(s);
+
+            if (storage.count(tempstring)) {
+                storage[tempstring].push_back(s);
+            } else {
+                storage[tempstring] = vector<string>{s};
+            }
         }
 
-        for (auto groups: storage) {
-            answer.push_back(groups.second);
+        vector<vector<string>> answer;
+
+        for (auto thing : storage) {
+            answer.push_back(thing.second);
         }
 
         return answer;
